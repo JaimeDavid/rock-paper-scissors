@@ -1,0 +1,52 @@
+.header{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.choice{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.result{
+    display: flex;
+    flex-direction: row;    
+    width: 80%;
+    height: 300px;
+    margin-left: 200px;
+    margin-right: 200px;
+    justify-content: space-evenly;
+   
+}
+
+.score{
+    display:flex;
+    flex-direction: row;
+    
+}
+
+#player-score, #computer-score{   
+    flex: 1;
+    text-align: center;
+    
+    
+}
+
+.score, .text{
+    flex: 1;
+}
+
+.game-text{
+    font-size: 25px;
+}
+
+#running-player-score, #running-computer-score, #running-game-text{
+    font-size: 35px;
+    
+}
