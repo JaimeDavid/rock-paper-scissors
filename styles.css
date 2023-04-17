@@ -1,7 +1,8 @@
 .header{
     margin-top: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+  
 }
 
 .choice{
@@ -49,4 +50,14 @@
 #running-player-score, #running-computer-score, #running-game-text{
     font-size: 35px;
     
+}
+
+img{
+    cursor: pointer;
+
+}
+
+#start-game:hover{
+    cursor: pointer;
+
 }

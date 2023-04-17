@@ -1,4 +1,4 @@
-// returns a random input from 1 to 3 and assings rock, paper or Scissors.
+//Assigns randomly computer choice as Rock, Paper or Scissors
 function getComputerChoice(){
     let choice = Math.floor(Math.random()*3) + 1;
 
@@ -10,99 +10,87 @@ function getComputerChoice(){
         return "Scissors";
     }
 }
-// checks the player selection and computer selection and returns a winner, loser or draw accoding to each case.
-function playRound(playerSelection, computerSelection){
-    if (playerSelection === "Rock" && computerSelection === "Paper" ){
-        console.log("Paper beats rock");
-        return "Computer wins";
 
-    }else if(playerSelection === "Rock" && computerSelection === "Scissors"){
-        console.log("Rock beats Scissors");
-        return "Player wins";
 
-    }else if(playerSelection === "Rock" && computerSelection === "Rock"){
-        console.log("Same choice means draw");
-        return "Draw";
+//Single game round with results.
+const draw = "Draw";
+const playerWins = "Player wins";
+const computerWins = "Computer wins";
+const gameOver = "Game over ";
+function playRound(playerChoice){
+    const computerChoice = getComputerChoice();
 
-    }else if (playerSelection === "Scissors" && computerSelection === "Scissors"){
-        console.log("Same choice means draw");
-        return"Draw";
+    if(
+    (playerChoice === "Rock" && computerChoice === "Rock") || 
+    (playerChoice === "Paper" && computerChoice === "Paper")|| 
+    (playerChoice === "Scissors" && computerChoice === "Scissors")
+    ){
+        document.querySelector('#running-game-text').textContent = draw;
+        
 
-    }else if (playerSelection === "Scissors" && computerSelection === "Rock"){
-        console.log("Rock beats Scissors");
-        return "Computer wins";
-
-    }else if (playerSelection === "Scissors" && computerSelection === "Paper"){
-        console.log("Scissors beats Paper");
-        return "Player wins";
-
-    }else if (playerSelection === "Paper" && computerSelection === "Rock"){
-        console.log("Paper beats Rock");
-        return "Player wins";
-
-    }else if (playerSelection === "Paper" && computerSelection === "Scissors"){
-        console.log("Scissors beats Paper");
-        return "Computer wins";
-
-    }else if( playerSelection === "Paper" && computerSelection === "Paper"){
-        console.log("Same choice means draw");
-        return "Draw";
-
-    }
-
-}
-
-// prompts the user for input and checks if it is valid, returns error or valid choice
-function getPlayerChoice(){
-    let playerInput = prompt("Please choose Rock, Paper or Scissors");
-    let choice = playerInput.charAt(0).toUpperCase() + playerInput.slice(1).toLowerCase();
-        if (choice !== "Rock" && choice !== "Paper" && choice !== "Scissors"){
-            console.log("Please provide a valid choice");
-            return "Error";
-
-        }else{
-             
-            return choice;
-
+    }else if (
+    (playerChoice === "Rock" && computerChoice === "Scissors")||
+    (playerChoice === "Scissors" && computerChoice === "Paper")||
+    (playerChoice === "Paper" && computerChoice === "Rock")
+    ){
+        document.querySelector('#running-game-text').textContent = playerWins;
+        updateScore(playerWins);
+        if(playerScore === 5){
+            document.querySelector('#running-game-text').textContent = gameOver + playerWins;
         }
+
+    }else if (
+    (playerChoice === "Scissors" && computerChoice  === "Rock")||
+    (playerChoice === "Paper" && computerChoice  === "Scissors")||
+    (playerChoice === "Rock" && computerChoice === "Paper")
+    ){
+        document.querySelector('#running-game-text').textContent = computerWins;
+        updateScore(computerWins);
+        if (computerScore === 5){
+            document.querySelector('#running-game-text').textContent = gameOver + computerWins;
+        }
+    }   
 }
 
-//runs 5 rounds totals the score of each player and returns a winner
-function game(){
-    let result;
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0 ; i < 5; i++){
-         let playerChoice = getPlayerChoice();
-         let computerChoice = getComputerChoice();
-         if (playerChoice === "Error"){
-            continue;
-         }else{
-            result = playRound(playerChoice, computerChoice);
-            if (result === "Player wins"){
-                playerScore +=1;
-            }else if( result === "Computer wins"){
-                computerScore +=1;
-            }else{
-                continue;
-            }
+// reset data
+let playerScore = 0;
+let computerScore = 0;
+let runningPlayerScore = document.querySelector('#running-player-score');
+let runningComputerScore = document.querySelector('#running-computer-score');
+function reset(){
+    computerScore = 0;
+    playerScore = 0;
+    runningPlayerScore.textContent = String(playerScore);
+    runningComputerScore.textContent = String(computerScore);
+}
 
-         }
-         console.log("Player scores is "+playerScore+" Computer score is "+computerScore);
-         
+//update Score
+function updateScore(result){
+    if (result === playerWins){
+        playerScore++
+        runningPlayerScore.textContent = String(playerScore);
+    }else if(result === computerWins){
+        computerScore++
+        runningComputerScore.textContent = String(computerScore);
     }
 
-    if (playerScore < computerScore){        
-        return "Computer wins"
-    }else if (playerScore > computerScore){        
-        return "Player wins"
-    }else{        
-        return "Draw"
-    }
+}
+
+
+
+const startGame = document.querySelector("#start-game");
+startGame.addEventListener('click', ()=>{
+   reset();
     
-}
+})
 
-console.log(game());
+const images = document.querySelectorAll('.containers');
+let imageInput;
+images.forEach((image) => {
+    image.addEventListener('click', ()=>{
+        playRound(String(image.id));
+    });
+});
 
 
 
