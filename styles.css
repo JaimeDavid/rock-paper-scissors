@@ -43,9 +43,13 @@
     flex: 1;
 }
 
-.game-text{
+.game-text, #player-choice, #computer-choice{
     font-size: 25px;
 }
+
+
+
+
 
 #running-player-score, #running-computer-score, #running-game-text{
     font-size: 35px;

@@ -17,6 +17,8 @@ const draw = "Draw";
 const playerWins = "Player wins";
 const computerWins = "Computer wins";
 const gameOver = "Game over ";
+const playerUsed = "Player choosed ";
+const computerUsed = "Computer choosed "
 function playRound(playerChoice){
     const computerChoice = getComputerChoice();
 
@@ -25,7 +27,9 @@ function playRound(playerChoice){
     (playerChoice === "Paper" && computerChoice === "Paper")|| 
     (playerChoice === "Scissors" && computerChoice === "Scissors")
     ){
-        document.querySelector('#running-game-text').textContent = draw;
+        document.querySelector('#running-game-text').textContent = draw ;
+        document.querySelector('#player-choice').textContent = playerUsed + playerChoice ;
+        document.querySelector('#computer-choice').textContent = computerUsed + computerChoice;
         
 
     }else if (
@@ -33,7 +37,10 @@ function playRound(playerChoice){
     (playerChoice === "Scissors" && computerChoice === "Paper")||
     (playerChoice === "Paper" && computerChoice === "Rock")
     ){
-        document.querySelector('#running-game-text').textContent = playerWins;
+        document.querySelector('#running-game-text').textContent = playerWins ;
+        document.querySelector('#player-choice').textContent = playerUsed + playerChoice ;
+        document.querySelector('#computer-choice').textContent = computerUsed + computerChoice;
+        
         updateScore(playerWins);
         if(playerScore === 5){
             document.querySelector('#running-game-text').textContent = gameOver + playerWins;
@@ -44,7 +51,9 @@ function playRound(playerChoice){
     (playerChoice === "Paper" && computerChoice  === "Scissors")||
     (playerChoice === "Rock" && computerChoice === "Paper")
     ){
-        document.querySelector('#running-game-text').textContent = computerWins;
+        document.querySelector('#running-game-text').textContent = computerWins ;
+        document.querySelector('#player-choice').textContent = playerUsed + playerChoice ;
+        document.querySelector('#computer-choice').textContent = computerUsed + computerChoice;
         updateScore(computerWins);
         if (computerScore === 5){
             document.querySelector('#running-game-text').textContent = gameOver + computerWins;
