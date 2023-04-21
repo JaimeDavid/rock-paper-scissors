@@ -84,7 +84,11 @@ function updateScore(result){
     }
 
 }
+function playSound(audioId){
+    const audio = document.querySelector(`.${audioId}`);
+    audio.play();
 
+}
 
 
 const startGame = document.querySelector("#start-game");
@@ -97,7 +101,10 @@ const images = document.querySelectorAll('.containers');
 let imageInput;
 images.forEach((image) => {
     image.addEventListener('click', ()=>{
+        playSound(String(image.id));
         playRound(String(image.id));
+
+        
     });
 });
 
